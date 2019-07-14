@@ -1,0 +1,62 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: bf560cea8011e19bc921d4eafffdf18368f1d70b782a84d307a57124c17bf7bc
+
+name:           cpu-arrow
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/zhengqunkoo/cpu-arrow#readme>
+homepage:       https://github.com/zhengqunkoo/cpu-arrow#readme
+bug-reports:    https://github.com/zhengqunkoo/cpu-arrow/issues
+author:         Zhengqun Koo
+maintainer:     root@zhengqunkoo.com
+copyright:      2019 Zhengqun Koo
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/zhengqunkoo/cpu-arrow
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_cpu_arrow
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable cpu-arrow-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_cpu_arrow
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , cpu-arrow
+  default-language: Haskell2010
+
+test-suite cpu-arrow-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_cpu_arrow
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , cpu-arrow
+  default-language: Haskell2010
