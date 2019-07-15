@@ -4,14 +4,15 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bf560cea8011e19bc921d4eafffdf18368f1d70b782a84d307a57124c17bf7bc
+-- hash: 11458bce07d897adf0187057aa43d9696fa7b08e660a89004cd6ee2871b529d2
 
 name:           cpu-arrow
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/zhengqunkoo/cpu-arrow#readme>
 homepage:       https://github.com/zhengqunkoo/cpu-arrow#readme
 bug-reports:    https://github.com/zhengqunkoo/cpu-arrow/issues
-author:         Zhengqun Koo
+author:         Zhengqun Koo,
+                Thomas Tan
 maintainer:     root@zhengqunkoo.com
 copyright:      2019 Zhengqun Koo
 license:        BSD3
