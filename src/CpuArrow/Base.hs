@@ -24,3 +24,6 @@ runCircuit :: Circuit b c -> b -> c
 runCircuit cir b = f b
   where
     f = unCircuit cir
+
+instance ArrowApply Circuit where
+  app = arr $ uncurry runCircuit
