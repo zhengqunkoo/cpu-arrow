@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 35e61412c229425a9727701030f5cebdf851f3141dbfd49409f501c7112523eb
+-- hash: a507ff6fc0a54a634431530395b6898210bce01449001e606830ac7be0ed2024
 
 name:           cpu-arrow
 version:        0.1.0.0
@@ -34,6 +34,7 @@ library
       CpuArrow.Advanced.HalfAdder
       CpuArrow.Advanced.Mux
       CpuArrow.Base
+      CpuArrow.BoolAlgebra
       CpuArrow.Cpu
       CpuArrow.Decoder
       CpuArrow.Logic
