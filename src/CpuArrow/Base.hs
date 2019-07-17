@@ -44,6 +44,3 @@ runCircuit :: Circuit b c -> Seq b -> Seq c
 runCircuit cir bs = f bs
   where
     f = unCircuit cir
-
-instance ArrowApply Circuit where
-  app = arr $ uncurry runCircuit
