@@ -3,25 +3,9 @@ module CpuArrow.Base where
 import Control.Arrow
 import Control.Category
 
-data Seq a =
-  Cons a (Seq a)
-
-instance Functor Seq where
-  fmap f (Cons a as) = Cons (f a) $ fmap f as
-
-class Zippable f where
-  zipTo :: (f a, f b) -> f (a, b)
-  zipFrom :: f (a, b) -> (f a, f b)
-
-instance Zippable Seq where
-  zipTo (Cons a as, Cons b bs) = Cons (a, b) $ zipTo (as, bs)
-  zipFrom (Cons (a, b) ts) = (Cons a as, Cons b bs)
-    where
-      (as, bs) = zipFrom ts
-
 newtype Circuit b c =
   Circuit
-    { unCircuit :: Seq b -> Seq c
+    { unCircuit :: [b] -> [c]
     }
 
 instance Category Circuit where
@@ -30,17 +14,18 @@ instance Category Circuit where
 
 instance Arrow Circuit where
   arr f = Circuit $ fmap f
-  first (Circuit f) = Circuit $ zipTo `dot` (\(b, d) -> (f b, d)) `dot` zipFrom
+  first (Circuit f) =
+    Circuit $ uncurry zip `dot` (\(b, d) -> (f b, d)) `dot` unzip
     where
       dot = (Control.Category..)
 
-on :: Seq Bool
-on = Cons True on
+on :: [Bool]
+on = True : on
 
-off :: Seq Bool
-off = Cons False off
+off :: [Bool]
+off = False : off
 
-runCircuit :: Circuit b c -> Seq b -> Seq c
+runCircuit :: Circuit b c -> [b] -> [c]
 runCircuit cir bs = f bs
   where
     f = unCircuit cir
