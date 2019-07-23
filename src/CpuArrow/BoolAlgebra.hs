@@ -30,6 +30,22 @@ instance BoolAlgebra Bool where
   bOr = (||)
   bNot = not
 
+instance BoolAlgebra Int where
+  top = 1
+  bottom = 0
+  bAnd i j =
+    if i == top && j == top
+      then top
+      else bottom
+  bOr i j =
+    if i == top || j == top
+      then top
+      else bottom
+  bNot i =
+    if i == top
+      then bottom
+      else top
+
 instance BoolAlgebra a => BoolAlgebra [a] where
   top = top : top
   bottom = bottom : bottom

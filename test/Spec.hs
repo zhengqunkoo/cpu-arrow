@@ -15,20 +15,20 @@ logicTests = testGroup "Logic" [andTests, orTests, notTests, xorTests]
 andTests :: TestTree
 andTests =
   testCase "And" $ do
-    runCircuit aAnd [(False, False), (False, True), (True, False), (True, True)] @=?
-      [False, False, False, True]
+    runCircuit aAnd ([(0, 0), (0, 1), (1, 0), (1, 1)] :: [(Int, Int)]) @=?
+      [0, 0, 0, 1]
 
 orTests :: TestTree
 orTests =
   testCase "Or" $ do
-    runCircuit aOr [(False, False), (False, True), (True, False), (True, True)] @=?
-      [False, True, True, True]
+    runCircuit aOr ([(0, 0), (0, 1), (1, 0), (1, 1)] :: [(Int, Int)]) @=?
+      [0, 1, 1, 1]
 
 notTests :: TestTree
-notTests = testCase "Not" $ do runCircuit aNot [False, True] @=? [True, False]
+notTests = testCase "Not" $ do runCircuit aNot ([0, 1] :: [Int]) @=? [1, 0]
 
 xorTests :: TestTree
 xorTests =
   testCase "Xor" $ do
-    runCircuit aXor [(False, False), (False, True), (True, False), (True, True)] @=?
-      [False, True, True, False]
+    runCircuit aXor ([(0, 0), (0, 1), (1, 0), (1, 1)] :: [(Int, Int)]) @=?
+      [0, 1, 1, 0]
