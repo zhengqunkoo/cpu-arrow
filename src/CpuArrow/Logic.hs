@@ -1,7 +1,6 @@
 module CpuArrow.Logic where
 
 import Control.Arrow
-import Control.Monad
 import CpuArrow.Base
 import CpuArrow.BoolAlgebra
 
