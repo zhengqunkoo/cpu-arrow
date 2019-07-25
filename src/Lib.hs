@@ -9,6 +9,7 @@ import CpuArrow.Base
 import CpuArrow.BoolAlgebra
 import CpuArrow.Cpu
 import CpuArrow.Decoder
+import CpuArrow.Half
 import CpuArrow.Logic
 import CpuArrow.Memory.Counter
 import CpuArrow.Memory.Ram

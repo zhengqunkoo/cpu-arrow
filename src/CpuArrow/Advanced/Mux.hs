@@ -3,6 +3,7 @@ module CpuArrow.Advanced.Mux where
 import Control.Arrow
 import CpuArrow.Base
 import CpuArrow.BoolAlgebra
+import CpuArrow.Half
 import CpuArrow.Logic
 
 aMux :: BoolAlgebra a => Circuit (T2 a, a) a
