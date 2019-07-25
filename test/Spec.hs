@@ -1,3 +1,4 @@
+import CpuArrow.Advanced.HalfAdder
 import CpuArrow.Advanced.Mux
 import CpuArrow.Base
 import CpuArrow.Logic
@@ -14,7 +15,7 @@ logicTests :: TestTree
 logicTests = testGroup "Logic" [andTests, orTests, notTests, xorTests]
 
 advancedTests :: TestTree
-advancedTests = testGroup "Advanced" [muxesTests]
+advancedTests = testGroup "Advanced" [muxesTests, halfAdderTests]
 
 muxesTests :: TestTree
 muxesTests = testGroup "Muxes" [muxTests, mux2Tests]
@@ -191,3 +192,9 @@ mux2Tests =
       , 1
       , 1
       ]
+
+halfAdderTests :: TestTree
+halfAdderTests =
+  testCase "HalfAdder" $ do
+    runCircuit aHalfAdder ([(0, 0), (0, 1), (1, 0), (1, 1)] :: [(Int, Int)]) @=?
+      [(0, 0), (0, 1), (0, 1), (1, 0)]
