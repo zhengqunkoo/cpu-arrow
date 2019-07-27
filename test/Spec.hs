@@ -1,3 +1,4 @@
+import CpuArrow.Advanced.Demux
 import CpuArrow.Advanced.FullAdder
 import CpuArrow.Advanced.HalfAdder
 import CpuArrow.Advanced.Mux
@@ -17,10 +18,15 @@ logicTests = testGroup "Logic" [andTests, orTests, notTests, xorTests]
 
 advancedTests :: TestTree
 advancedTests =
-  testGroup "Advanced" [muxesTests, halfAdderTests, fullAdderTests]
+  testGroup
+    "Advanced"
+    [muxesTests, halfAdderTests, fullAdderTests, demuxesTests]
 
 muxesTests :: TestTree
 muxesTests = testGroup "Muxes" [muxTests, mux2Tests]
+
+demuxesTests :: TestTree
+demuxesTests = testGroup "Demuxes" [demuxTests, demux2Tests, demux3Tests]
 
 andTests :: TestTree
 andTests =
@@ -216,3 +222,73 @@ fullAdderTests =
        , ((1, 1), 1)
        ] :: [((Int, Int), Int)]) @=?
       [(0, 0), (0, 1), (0, 1), (1, 0), (0, 1), (1, 0), (1, 0), (1, 1)]
+
+demuxTests :: TestTree
+demuxTests =
+  testCase "Demux" $ do
+    runCircuit aDemux ([(0, 0), (0, 1), (1, 0), (1, 1)] :: [(Int, Int)]) @=?
+      [(0, 0), (0, 0), (0, 1), (1, 0)]
+
+demux2Tests :: TestTree
+demux2Tests =
+  testCase "Demux2" $ do
+    runCircuit
+      aDemux2
+      ([ (0, (0, 0))
+       , (0, (0, 1))
+       , (0, (1, 0))
+       , (0, (1, 1))
+       , (1, (0, 0))
+       , (1, (0, 1))
+       , (1, (1, 0))
+       , (1, (1, 1))
+       ] :: [(Int, (Int, Int))]) @=?
+      [ (0, 0, 0, 0)
+      , (0, 0, 0, 0)
+      , (0, 0, 0, 0)
+      , (0, 0, 0, 0)
+      , (0, 0, 0, 1)
+      , (0, 0, 1, 0)
+      , (0, 1, 0, 0)
+      , (1, 0, 0, 0)
+      ]
+
+demux3Tests :: TestTree
+demux3Tests =
+  testCase "Demux3" $ do
+    runCircuit
+      aDemux3
+      ([ (0, (0, 0, 0))
+       , (0, (0, 0, 1))
+       , (0, (0, 1, 0))
+       , (0, (0, 1, 1))
+       , (0, (1, 0, 0))
+       , (0, (1, 0, 1))
+       , (0, (1, 1, 0))
+       , (0, (1, 1, 1))
+       , (1, (0, 0, 0))
+       , (1, (0, 0, 1))
+       , (1, (0, 1, 0))
+       , (1, (0, 1, 1))
+       , (1, (1, 0, 0))
+       , (1, (1, 0, 1))
+       , (1, (1, 1, 0))
+       , (1, (1, 1, 1))
+       ] :: [(Int, (Int, Int, Int))]) @=?
+      [ (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 0)
+      , (0, 0, 0, 0, 0, 0, 0, 1)
+      , (0, 0, 0, 0, 0, 0, 1, 0)
+      , (0, 0, 0, 0, 0, 1, 0, 0)
+      , (0, 0, 0, 0, 1, 0, 0, 0)
+      , (0, 0, 0, 1, 0, 0, 0, 0)
+      , (0, 0, 1, 0, 0, 0, 0, 0)
+      , (0, 1, 0, 0, 0, 0, 0, 0)
+      , (1, 0, 0, 0, 0, 0, 0, 0)
+      ]
