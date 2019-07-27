@@ -8,7 +8,8 @@ import CpuArrow.Logic
 
 aMux :: BoolAlgebra a => Circuit (T2 a, a) a
 aMux =
-  (first (arr snd) >>> aAnd) &&& (first (arr fst) >>> second aNot >>> aAnd) >>>
+  (first (arr halfFst) >>> second aNot >>> aAnd) &&&
+  (first (arr halfSnd) >>> aAnd) >>>
   aOr
 
 aMux2 :: BoolAlgebra a => Circuit (T4 a, (a, a)) a
