@@ -20,13 +20,16 @@ advancedTests :: TestTree
 advancedTests =
   testGroup
     "Advanced"
-    [muxesTests, halfAdderTests, fullAdderTests, demuxesTests]
+    [muxesTests, halfAdderTests, fullAddersTests, demuxesTests]
 
 muxesTests :: TestTree
 muxesTests = testGroup "Muxes" [muxTests, mux2Tests]
 
 demuxesTests :: TestTree
 demuxesTests = testGroup "Demuxes" [demuxTests, demux2Tests, demux3Tests]
+
+fullAddersTests :: TestTree
+fullAddersTests = testGroup "Demuxes" [fullAdderTests, fullAdder2Tests]
 
 andTests :: TestTree
 andTests =
@@ -222,6 +225,78 @@ fullAdderTests =
        , ((1, 1), 1)
        ] :: [((Int, Int), Int)]) @=?
       [(0, 0), (0, 1), (0, 1), (1, 0), (0, 1), (1, 0), (1, 0), (1, 1)]
+
+fullAdder2Tests :: TestTree
+fullAdder2Tests =
+  testCase "FullAdder2" $ do
+    runCircuit
+      aFullAdder2
+      ([ (((0, 0), (0, 0)), 0)
+       , (((0, 0), (0, 0)), 1)
+       , (((0, 0), (0, 1)), 0)
+       , (((0, 0), (0, 1)), 1)
+       , (((0, 0), (1, 0)), 0)
+       , (((0, 0), (1, 0)), 1)
+       , (((0, 0), (1, 1)), 0)
+       , (((0, 0), (1, 1)), 1)
+       , (((0, 1), (0, 0)), 0)
+       , (((0, 1), (0, 0)), 1)
+       , (((0, 1), (0, 1)), 0)
+       , (((0, 1), (0, 1)), 1)
+       , (((0, 1), (1, 0)), 0)
+       , (((0, 1), (1, 0)), 1)
+       , (((0, 1), (1, 1)), 0)
+       , (((0, 1), (1, 1)), 1)
+       , (((1, 0), (0, 0)), 0)
+       , (((1, 0), (0, 0)), 1)
+       , (((1, 0), (0, 1)), 0)
+       , (((1, 0), (0, 1)), 1)
+       , (((1, 0), (1, 0)), 0)
+       , (((1, 0), (1, 0)), 1)
+       , (((1, 0), (1, 1)), 0)
+       , (((1, 0), (1, 1)), 1)
+       , (((1, 1), (0, 0)), 0)
+       , (((1, 1), (0, 0)), 1)
+       , (((1, 1), (0, 1)), 0)
+       , (((1, 1), (0, 1)), 1)
+       , (((1, 1), (1, 0)), 0)
+       , (((1, 1), (1, 0)), 1)
+       , (((1, 1), (1, 1)), 0)
+       , (((1, 1), (1, 1)), 1)
+       ] :: [(((Int, Int), (Int, Int)), Int)]) @=?
+      [ (0, (0, 0))
+      , (0, (0, 1))
+      , (0, (0, 1))
+      , (0, (1, 0))
+      , (0, (1, 0))
+      , (0, (1, 1))
+      , (0, (1, 1))
+      , (1, (0, 0))
+      , (0, (0, 1))
+      , (0, (1, 0))
+      , (0, (1, 0))
+      , (0, (1, 1))
+      , (0, (1, 1))
+      , (1, (0, 0))
+      , (1, (0, 0))
+      , (1, (0, 1))
+      , (0, (1, 0))
+      , (0, (1, 1))
+      , (0, (1, 1))
+      , (1, (0, 0))
+      , (1, (0, 0))
+      , (1, (0, 1))
+      , (1, (0, 1))
+      , (1, (1, 0))
+      , (0, (1, 1))
+      , (1, (0, 0))
+      , (1, (0, 0))
+      , (1, (0, 1))
+      , (1, (0, 1))
+      , (1, (1, 0))
+      , (1, (1, 0))
+      , (1, (1, 1))
+      ]
 
 demuxTests :: TestTree
 demuxTests =
